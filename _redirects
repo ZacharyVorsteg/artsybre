@@ -1,0 +1,4 @@
+# Netlify redirects
+/form    /commission.html   301
+/quote   /commission.html   301
+/contact /commission.html   301

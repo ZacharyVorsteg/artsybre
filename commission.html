@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Request a custom oil painting commission from Artsy Bre. Portraits, pets, landscapes, and more.">
+    <title>Commission Request | Artsy Bre - Custom Oil Paintings</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header style="background: #2c3e50; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center;">
+        <a href="/" style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; color: white; text-decoration: none; font-weight: 600;">Artsy Bre</a>
+        <a href="/" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem;">&#8592; Back to Portfolio</a>
+    </header>
+
+    <div class="commission-container">
+        <!-- Progress Indicator -->
+        <div class="progress-bar">
+            <div class="progress-step active" data-step="1">
+                <span class="step-number">1</span>
+                <span class="step-label">Project</span>
+            </div>
+            <div class="progress-step" data-step="2">
+                <span class="step-number">2</span>
+                <span class="step-label">Details</span>
+            </div>
+            <div class="progress-step" data-step="3">
+                <span class="step-number">3</span>
+                <span class="step-label">Reference</span>
+            </div>
+            <div class="progress-step" data-step="4">
+                <span class="step-number">4</span>
+                <span class="step-label">Contact</span>
+            </div>
+        </div>
+
+        <form id="commissionForm" class="commission-form" novalidate>
+
+            <!-- ============================================ -->
+            <!-- STEP 1: Project Type & Size                  -->
+            <!-- ============================================ -->
+            <div class="form-step active" data-step="1">
+                <h2>Tell Me About Your Vision</h2>
+                <p class="step-intro">Let's start with the basics of your custom oil painting.</p>
+
+                <!-- Project Type -->
+                <div class="form-group">
+                    <label class="form-label required">What type of painting are you interested in?</label>
+                    <div class="option-grid">
+                        <label class="option-card">
+                            <input type="radio" name="project_type" value="portrait_single" required>
+                            <span class="option-icon">👤</span>
+                            <span class="option-title">Single Portrait</span>
+                            <span class="option-desc">One person, head & shoulders or full figure</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="project_type" value="portrait_couple">
+                            <span class="option-icon">👥</span>
+                            <span class="option-title">Couple/Duo Portrait</span>
+                            <span class="option-desc">Two people together</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="project_type" value="portrait_family">
+                            <span class="option-icon">👨‍👩‍👧‍👦</span>
+                            <span class="option-title">Family/Group Portrait</span>
+                            <span class="option-desc">Three or more people</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="project_type" value="pet">
+                            <span class="option-icon">🐾</span>
+                            <span class="option-title">Pet Portrait</span>
+                            <span class="option-desc">Dogs, cats, horses, or other beloved pets</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="project_type" value="landscape">
+                            <span class="option-icon">🏞️</span>
+                            <span class="option-title">Landscape/Scenery</span>
+                            <span class="option-desc">Places, nature, or architectural scenes</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="project_type" value="still_life">
+                            <span class="option-icon">🎨</span>
+                            <span class="option-title">Still Life/Object</span>
+                            <span class="option-desc">Objects, florals, or meaningful items</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="project_type" value="memorial">
+                            <span class="option-icon">💜</span>
+                            <span class="option-title">Memorial Portrait</span>
+                            <span class="option-desc">Honoring a loved one who has passed</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="project_type" value="other">
+                            <span class="option-icon">✨</span>
+                            <span class="option-title">Something Else</span>
+                            <span class="option-desc">I have a unique idea in mind</span>
+                        </label>
+                    </div>
+                    <span class="field-error" data-error="project_type"></span>
+                </div>
+
+                <!-- Number of Subjects (conditional) -->
+                <div class="form-group conditional" data-show-if="portrait_family,portrait_couple">
+                    <label class="form-label required" for="num_subjects">How many people/pets will be in the painting?</label>
+                    <select id="num_subjects" name="num_subjects" class="form-select">
+                        <option value="">Select number...</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6+">6 or more</option>
+                    </select>
+                    <span class="field-hint">Each additional subject adds complexity and affects pricing.</span>
+                </div>
+
+                <!-- Canvas Size -->
+                <div class="form-group">
+                    <label class="form-label required">What size canvas are you considering?</label>
+                    <p class="field-hint">Pricing is based on canvas size. Larger canvases allow for more detail.</p>
+                    <div class="size-grid">
+                        <label class="size-card">
+                            <input type="radio" name="canvas_size" value="8x10" required>
+                            <span class="size-dimensions">8" x 10"</span>
+                            <span class="size-name">Petite</span>
+                            <span class="size-price">Starting at $350</span>
+                            <span class="size-note">Perfect for desk display</span>
+                        </label>
+                        <label class="size-card">
+                            <input type="radio" name="canvas_size" value="11x14">
+                            <span class="size-dimensions">11" x 14"</span>
+                            <span class="size-name">Small</span>
+                            <span class="size-price">Starting at $550</span>
+                            <span class="size-note">Great for intimate spaces</span>
+                        </label>
+                        <label class="size-card popular">
+                            <span class="popular-badge">Most Popular</span>
+                            <input type="radio" name="canvas_size" value="16x20">
+                            <span class="size-dimensions">16" x 20"</span>
+                            <span class="size-name">Medium</span>
+                            <span class="size-price">Starting at $850</span>
+                            <span class="size-note">Ideal for single portraits</span>
+                        </label>
+                        <label class="size-card">
+                            <input type="radio" name="canvas_size" value="18x24">
+                            <span class="size-dimensions">18" x 24"</span>
+                            <span class="size-name">Large</span>
+                            <span class="size-price">Starting at $1,200</span>
+                            <span class="size-note">Great for couples/details</span>
+                        </label>
+                        <label class="size-card">
+                            <input type="radio" name="canvas_size" value="24x30">
+                            <span class="size-dimensions">24" x 30"</span>
+                            <span class="size-name">Statement</span>
+                            <span class="size-price">Starting at $1,800</span>
+                            <span class="size-note">Perfect for family groups</span>
+                        </label>
+                        <label class="size-card">
+                            <input type="radio" name="canvas_size" value="30x40">
+                            <span class="size-dimensions">30" x 40"</span>
+                            <span class="size-name">Grand</span>
+                            <span class="size-price">Starting at $2,800</span>
+                            <span class="size-note">Stunning focal piece</span>
+                        </label>
+                        <label class="size-card">
+                            <input type="radio" name="canvas_size" value="custom">
+                            <span class="size-dimensions">Custom</span>
+                            <span class="size-name">Your Dimensions</span>
+                            <span class="size-price">Quote provided</span>
+                            <span class="size-note">Specify in notes</span>
+                        </label>
+                    </div>
+                    <span class="field-error" data-error="canvas_size"></span>
+                </div>
+
+                <!-- Custom Size Input (conditional) -->
+                <div class="form-group conditional" data-show-if-size="custom">
+                    <label class="form-label" for="custom_size">Please specify your desired dimensions:</label>
+                    <input type="text" id="custom_size" name="custom_size" class="form-input"
+                           placeholder="e.g., 36 x 48 inches">
+                </div>
+
+                <div class="form-navigation">
+                    <button type="button" class="btn btn-next">Continue to Style Details</button>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- STEP 2: Style & Preferences                  -->
+            <!-- ============================================ -->
+            <div class="form-step" data-step="2">
+                <h2>Style & Preferences</h2>
+                <p class="step-intro">Help me understand your aesthetic vision.</p>
+
+                <!-- Style Preference -->
+                <div class="form-group">
+                    <label class="form-label required">What painting style appeals to you?</label>
+                    <div class="style-grid">
+                        <label class="style-card">
+                            <input type="radio" name="style" value="realistic" required>
+                            <div class="style-preview realistic"></div>
+                            <span class="style-name">Realistic</span>
+                            <span class="style-desc">Detailed, true-to-life representation with precise features</span>
+                        </label>
+                        <label class="style-card">
+                            <input type="radio" name="style" value="classical">
+                            <div class="style-preview classical"></div>
+                            <span class="style-name">Classical</span>
+                            <span class="style-desc">Traditional oil painting style with rich, layered techniques</span>
+                        </label>
+                        <label class="style-card">
+                            <input type="radio" name="style" value="impressionistic">
+                            <div class="style-preview impressionistic"></div>
+                            <span class="style-name">Impressionistic</span>
+                            <span class="style-desc">Loose brushwork capturing light and atmosphere</span>
+                        </label>
+                        <label class="style-card">
+                            <input type="radio" name="style" value="contemporary">
+                            <div class="style-preview contemporary"></div>
+                            <span class="style-name">Contemporary</span>
+                            <span class="style-desc">Modern interpretation with bold colors and textures</span>
+                        </label>
+                        <label class="style-card">
+                            <input type="radio" name="style" value="not_sure">
+                            <div class="style-preview unsure"></div>
+                            <span class="style-name">Not Sure</span>
+                            <span class="style-desc">I'd like your recommendation based on the subject</span>
+                        </label>
+                    </div>
+                    <span class="field-error" data-error="style"></span>
+                </div>
+
+                <!-- Color Palette -->
+                <div class="form-group">
+                    <label class="form-label">Do you have color preferences?</label>
+                    <p class="field-hint">This helps match the painting to your space or personal taste.</p>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="color_pref[]" value="warm">
+                            <span class="checkbox-label">Warm tones (reds, oranges, yellows)</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="color_pref[]" value="cool">
+                            <span class="checkbox-label">Cool tones (blues, greens, purples)</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="color_pref[]" value="neutral">
+                            <span class="checkbox-label">Neutral palette (earth tones, grays)</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="color_pref[]" value="vibrant">
+                            <span class="checkbox-label">Vibrant and bold colors</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="color_pref[]" value="muted">
+                            <span class="checkbox-label">Soft and muted tones</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="color_pref[]" value="match_room">
+                            <span class="checkbox-label">Match my room (describe below)</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="color_pref[]" value="artist_choice">
+                            <span class="checkbox-label">Artist's choice based on subject</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Room/Color Match Description -->
+                <div class="form-group conditional" data-show-if-color="match_room">
+                    <label class="form-label" for="room_description">Describe your room's color scheme:</label>
+                    <textarea id="room_description" name="room_description" class="form-textarea" rows="2"
+                              placeholder="e.g., Navy blue walls, white trim, gold accents, mid-century modern furniture"></textarea>
+                </div>
+
+                <!-- Background Preference -->
+                <div class="form-group">
+                    <label class="form-label">What type of background do you envision?</label>
+                    <select name="background_pref" class="form-select">
+                        <option value="">Select an option...</option>
+                        <option value="neutral_solid">Neutral solid color</option>
+                        <option value="gradient">Soft gradient/atmospheric</option>
+                        <option value="from_photo">Keep background from reference photo</option>
+                        <option value="custom_setting">Custom setting (describe below)</option>
+                        <option value="artist_choice">Artist's recommendation</option>
+                    </select>
+                </div>
+
+                <!-- Background Details -->
+                <div class="form-group conditional" data-show-if-bg="custom_setting">
+                    <label class="form-label" for="background_details">Describe your desired background:</label>
+                    <textarea id="background_details" name="background_details" class="form-textarea" rows="2"
+                              placeholder="e.g., Garden setting, beach at sunset, library interior"></textarea>
+                </div>
+
+                <!-- Timeline -->
+                <div class="form-group">
+                    <label class="form-label required">When do you need the painting completed?</label>
+                    <select name="timeline" class="form-select" required>
+                        <option value="">Select timeline...</option>
+                        <option value="flexible">Flexible / No rush (8-12 weeks)</option>
+                        <option value="standard">Standard timeline (6-8 weeks)</option>
+                        <option value="priority">Priority - I have an event (4-6 weeks, +25%)</option>
+                        <option value="rush">Rush - Urgent need (2-4 weeks, +50%)</option>
+                        <option value="specific_date">Specific date in mind</option>
+                    </select>
+                    <span class="field-error" data-error="timeline"></span>
+                </div>
+
+                <!-- Specific Date (conditional) -->
+                <div class="form-group conditional" data-show-if-timeline="specific_date">
+                    <label class="form-label" for="deadline_date">What date do you need it by?</label>
+                    <input type="date" id="deadline_date" name="deadline_date" class="form-input">
+                    <span class="field-hint">For a gift or event? I'll let you know if this timeline is achievable.</span>
+                </div>
+
+                <!-- Occasion/Purpose -->
+                <div class="form-group">
+                    <label class="form-label" for="occasion">Is this for a special occasion?</label>
+                    <select id="occasion" name="occasion" class="form-select">
+                        <option value="">Select if applicable...</option>
+                        <option value="gift_birthday">Birthday gift</option>
+                        <option value="gift_anniversary">Anniversary gift</option>
+                        <option value="gift_wedding">Wedding gift</option>
+                        <option value="gift_holiday">Holiday gift</option>
+                        <option value="gift_other">Other gift</option>
+                        <option value="memorial">Memorial / In memory</option>
+                        <option value="home_decor">Home decor</option>
+                        <option value="office">Office / Professional space</option>
+                        <option value="personal">Personal enjoyment</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-navigation">
+                    <button type="button" class="btn btn-back">Back</button>
+                    <button type="button" class="btn btn-next">Continue to Photos</button>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- STEP 3: Reference Photos & Details           -->
+            <!-- ============================================ -->
+            <div class="form-step" data-step="3">
+                <h2>Reference Photos</h2>
+                <p class="step-intro">Great reference photos are key to a beautiful painting.</p>
+
+                <!-- Photo Guidelines -->
+                <div class="info-box">
+                    <h4>Photo Guidelines for Best Results</h4>
+                    <ul class="guidelines-list">
+                        <li><strong>High resolution:</strong> Original photos from your camera or phone (not screenshots or social media downloads)</li>
+                        <li><strong>Good lighting:</strong> Natural light without harsh shadows. Avoid direct sunlight or flash.</li>
+                        <li><strong>Clear focus:</strong> Eyes and key features should be sharp and in focus</li>
+                        <li><strong>Multiple angles:</strong> Helpful but not required - one great photo is better than many poor ones</li>
+                    </ul>
+                    <p class="guidelines-note">Don't have the perfect photo? I can work with what you have and discuss options.</p>
+                </div>
+
+                <!-- File Upload -->
+                <div class="form-group">
+                    <label class="form-label required">Upload your reference photo(s)</label>
+                    <div class="upload-zone" id="uploadZone">
+                        <div class="upload-icon">📷</div>
+                        <p class="upload-text">Drag & drop photos here, or <span class="upload-link">browse files</span></p>
+                        <p class="upload-formats">Accepts: JPG, PNG, HEIC (max 25MB each, up to 10 files)</p>
+                        <input type="file" id="photo_upload" name="photos"
+                               accept=".jpg,.jpeg,.png,.heic" multiple class="upload-input">
+                    </div>
+                    <div id="uploadPreview" class="upload-preview"></div>
+                    <span class="field-error" data-error="photos"></span>
+                </div>
+
+                <!-- Primary Photo Selection -->
+                <div class="form-group conditional" data-show-if-multiple-photos>
+                    <label class="form-label">Which photo should be the primary reference?</label>
+                    <p class="field-hint">I'll use this for the main pose and expression.</p>
+                    <div id="primaryPhotoSelector"></div>
+                </div>
+
+                <!-- Photo Notes -->
+                <div class="form-group">
+                    <label class="form-label" for="photo_notes">Any notes about your photos?</label>
+                    <textarea id="photo_notes" name="photo_notes" class="form-textarea" rows="3"
+                              placeholder="e.g., 'Use the pose from photo 1 but the expression from photo 2' or 'This is the only photo I have of my grandmother'"></textarea>
+                </div>
+
+                <!-- Subject Details -->
+                <div class="form-group">
+                    <label class="form-label" for="subject_details">Tell me about your subject:</label>
+                    <p class="field-hint">Context helps me capture personality and emotion.</p>
+                    <textarea id="subject_details" name="subject_details" class="form-textarea" rows="4"
+                              placeholder="Who is this? What's their personality like? Any specific expressions, features, or characteristics you want emphasized? For pets: breed, age, personality traits..."></textarea>
+                </div>
+
+                <!-- Special Requests -->
+                <div class="form-group">
+                    <label class="form-label" for="special_requests">Any special requests or changes from the photo?</label>
+                    <textarea id="special_requests" name="special_requests" class="form-textarea" rows="3"
+                              placeholder="e.g., 'Remove the background clutter', 'Add our dog who passed away', 'Change the clothing color', 'Combine people from different photos'"></textarea>
+                    <span class="field-hint">Note: Complex modifications may affect pricing.</span>
+                </div>
+
+                <!-- Framing Interest -->
+                <div class="form-group">
+                    <label class="form-label">Are you interested in framing?</label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="framing" value="yes_quote">
+                            <span class="radio-label">Yes, please include framing options in quote</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="framing" value="maybe">
+                            <span class="radio-label">Maybe, I'd like to see options</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="framing" value="no">
+                            <span class="radio-label">No, I'll handle framing myself</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="framing" value="gallery_wrap">
+                            <span class="radio-label">Gallery wrap (no frame needed)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-navigation">
+                    <button type="button" class="btn btn-back">Back</button>
+                    <button type="button" class="btn btn-next">Continue to Contact Info</button>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- STEP 4: Contact & Budget                     -->
+            <!-- ============================================ -->
+            <div class="form-step" data-step="4">
+                <h2>Let's Connect</h2>
+                <p class="step-intro">Almost done! I'll use this info to send your personalized quote.</p>
+
+                <!-- Contact Info -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label required" for="first_name">First Name</label>
+                        <input type="text" id="first_name" name="first_name" class="form-input"
+                               required autocomplete="given-name" placeholder="Jane">
+                        <span class="field-error" data-error="first_name"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label required" for="last_name">Last Name</label>
+                        <input type="text" id="last_name" name="last_name" class="form-input"
+                               required autocomplete="family-name" placeholder="Smith">
+                        <span class="field-error" data-error="last_name"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label required" for="email">Email Address</label>
+                    <input type="email" id="email" name="email" class="form-input"
+                           required autocomplete="email" placeholder="jane@example.com">
+                    <span class="field-hint">I'll send your quote and all updates here.</span>
+                    <span class="field-error" data-error="email"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="phone">Phone Number <span class="optional">(optional)</span></label>
+                    <input type="tel" id="phone" name="phone" class="form-input"
+                           autocomplete="tel" placeholder="(555) 123-4567">
+                    <span class="field-hint">For quick questions or scheduling a consultation call.</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="location">Your Location <span class="optional">(optional)</span></label>
+                    <input type="text" id="location" name="location" class="form-input"
+                           placeholder="City, State or Country">
+                    <span class="field-hint">Helps with shipping estimates and local pickup options.</span>
+                </div>
+
+                <!-- Budget Range -->
+                <div class="form-group">
+                    <label class="form-label">What's your budget range for this project?</label>
+                    <p class="field-hint">This helps me tailor recommendations. Final pricing depends on size and complexity.</p>
+                    <select name="budget" class="form-select">
+                        <option value="">Prefer not to say</option>
+                        <option value="under_500">Under $500</option>
+                        <option value="500_1000">$500 - $1,000</option>
+                        <option value="1000_2000">$1,000 - $2,000</option>
+                        <option value="2000_3500">$2,000 - $3,500</option>
+                        <option value="3500_5000">$3,500 - $5,000</option>
+                        <option value="over_5000">$5,000+</option>
+                        <option value="flexible">Flexible for the right piece</option>
+                    </select>
+                </div>
+
+                <!-- How Did You Hear -->
+                <div class="form-group">
+                    <label class="form-label" for="referral_source">How did you hear about me?</label>
+                    <select id="referral_source" name="referral_source" class="form-select">
+                        <option value="">Select one...</option>
+                        <option value="instagram">Instagram</option>
+                        <option value="facebook">Facebook</option>
+                        <option value="pinterest">Pinterest</option>
+                        <option value="google">Google Search</option>
+                        <option value="etsy">Etsy</option>
+                        <option value="friend_family">Friend or Family Referral</option>
+                        <option value="past_client">I'm a Past Client</option>
+                        <option value="art_show">Art Show / Gallery</option>
+                        <option value="local_business">Local Business Card/Flyer</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <!-- Referral Name (conditional) -->
+                <div class="form-group conditional" data-show-if-referral="friend_family">
+                    <label class="form-label" for="referral_name">Who referred you?</label>
+                    <input type="text" id="referral_name" name="referral_name" class="form-input"
+                           placeholder="Their name (so I can thank them!)">
+                </div>
+
+                <!-- Additional Comments -->
+                <div class="form-group">
+                    <label class="form-label" for="additional_comments">Anything else you'd like me to know?</label>
+                    <textarea id="additional_comments" name="additional_comments" class="form-textarea" rows="3"
+                              placeholder="Questions, concerns, or anything I haven't asked about..."></textarea>
+                </div>
+
+                <!-- Preferred Contact Method -->
+                <div class="form-group">
+                    <label class="form-label">Preferred contact method:</label>
+                    <div class="radio-group inline">
+                        <label class="radio-item">
+                            <input type="radio" name="contact_method" value="email" checked>
+                            <span class="radio-label">Email</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="contact_method" value="phone">
+                            <span class="radio-label">Phone Call</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="contact_method" value="text">
+                            <span class="radio-label">Text Message</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Consent -->
+                <div class="form-group">
+                    <label class="checkbox-item consent">
+                        <input type="checkbox" name="consent" required>
+                        <span class="checkbox-label">I understand this is a quote request, not a commitment. I consent to being contacted about my commission inquiry.</span>
+                    </label>
+                    <span class="field-error" data-error="consent"></span>
+                </div>
+
+                <!-- Newsletter Opt-in -->
+                <div class="form-group">
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="newsletter" value="yes">
+                        <span class="checkbox-label">Keep me updated on new work, studio news, and occasional promotions. <span class="optional">(optional)</span></span>
+                    </label>
+                </div>
+
+                <div class="form-navigation">
+                    <button type="button" class="btn btn-back">Back</button>
+                    <button type="submit" class="btn btn-submit">Submit Commission Request</button>
+                </div>
+
+                <!-- Trust Signals -->
+                <div class="trust-signals">
+                    <div class="trust-item">
+                        <span class="trust-icon">🔒</span>
+                        <span>Your information is secure and never shared</span>
+                    </div>
+                    <div class="trust-item">
+                        <span class="trust-icon">💬</span>
+                        <span>Response within 24-48 hours</span>
+                    </div>
+                    <div class="trust-item">
+                        <span class="trust-icon">✓</span>
+                        <span>No obligation quote</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- Success Message                              -->
+            <!-- ============================================ -->
+            <div class="form-step success-step" data-step="success">
+                <div class="success-icon">✓</div>
+                <h2>Thank You!</h2>
+                <p class="success-message">Your commission request has been received. I'm excited to learn about your project!</p>
+                <div class="next-steps">
+                    <h4>What Happens Next:</h4>
+                    <ol>
+                        <li><strong>Review:</strong> I'll review your request and photos within 24-48 hours</li>
+                        <li><strong>Quote:</strong> You'll receive a detailed quote with timeline</li>
+                        <li><strong>Consultation:</strong> We'll discuss any questions before you decide</li>
+                        <li><strong>No pressure:</strong> Take your time - there's no obligation</li>
+                    </ol>
+                </div>
+                <p class="success-note">Check your email (<span id="confirmEmail"></span>) for a confirmation.</p>
+            </div>
+
+        </form>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
